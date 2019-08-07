@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    {% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {%for e in emp1%}
+    <label>Employee id</label> <input type="text" name="eid" value="{{ e.empid}}"><br>
+    <label>First name</label> <input type="text" name="fname" value="{{ e.user.first_name }}"><br>
+    <label>Last name</label> <input type="text" name="lname" value="{{ e.user.last_name }}"><br>
+    <label>House name</label> <input type="text" name="housename" value="{{ e.housename }}"><br>
+    <label>City</label> <input type="text" name="city" value="{{ e.city }}"><br>
+    <label>State</label><input type="text" name="state" value="{{ e.state }}"><br>
+    <label>Pincoe</label> <input type="text" name="pincode" value="{{ e.pincode }}"><br>
+    <label>Mobile<label> <input type="text" name="mobile" value="{{ e.mobile }}"><br>
+    {%if user.is_superuser%}
+     <input type="radio" name="user1" value="superuser"  {%if e.user.is_superuser%} checked {%endif%}>Super User<br>
+     <input type="radio" name="user1" value="staff"  {%if e.user.is_staff%} checked {%endif%} > Staff<br>
+     <input type="radio" name="user1" value="none"  {%if e.user.is_superuser != True and e.user.is_staff != True %} checked {%endif%} >None<br>
+     {%endif%}
+    <button type="submit">Submit</button>
+    {%endfor%}
+  </form>
+{% endblock %}
+
+</body>
+</html>

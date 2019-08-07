@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	{% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit" >Search</button>
+  </form>
+  <ul>
+  {% for e in filter.qs %}
+    <li>{{ e.empid}} - {{ e.user.first_name }} {{ e.user.last_name }}<br>{{ e.housename }} <br>{{ e.city }}<br>{{ e.state }}-{{ e.pincode }}<br>{{ e.mobile }}<br><a href="{% url 'update' e.id %}">
+      {%if request.user.id == e.user.id or request.user.is_superuser%}
+
+      <button name="update">Update</button></a></li>
+      
+      {%endif%}
+  {% endfor %}
+  </ul>
+{% endblock %}
+
+</body>
+</html>
