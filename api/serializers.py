@@ -50,7 +50,8 @@ class EmpSerializer(serializers.ModelSerializer):
 		user.email=c['email']
 		emply, created= emp.objects.get_or_create(user=user)
 		emply.housename= validated_data.pop('housename')
-		emply.boss= validated_data.pop('boss')
+		if emply.boss:
+			emply.boss= validated_data.pop('boss')
 		emply.city=  validated_data.pop('city')
 		emply.state=  validated_data.pop('state')
 		emply.pincode= validated_data.pop('pincode')

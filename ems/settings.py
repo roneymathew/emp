@@ -26,7 +26,7 @@ SECRET_KEY = 'e(tm&!5v5a+1xnrizmbdhn75e_6#m5cg+)vv#pc*(7^+%$g588'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0','localhost']
 
 
 # Application definition
@@ -53,6 +53,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,18 +62,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    
 ]
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = False
 CORS_ORIGIN_WHITELIST = (
-    'localhost:4200',
+    'http://127.0.0.1:4200',
 )
 CORS_ORIGIN_REGEX_WHITELIST = (
-    'localhost:4200',
-    'localhost:4400/employee/',
-    'localhost:4400/login/',
+    '127.0.0.1:4200',
+    '127.0.0.1:4200/employee/',
+    '127.0.0.1:4200/login/',
 
 )
 
@@ -102,9 +103,9 @@ WSGI_APPLICATION = 'ems.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'roney',
+        'NAME': 'emp',
         'USER':'user',
-        'PASSWORD':'12345678',
+        'PASSWORD':'Password1!',
         'HOST':'localhost',
         'PORT':'5432',
 
@@ -156,7 +157,7 @@ JWT_AUTH = {
 }
 
 # Make JWT Auth the default authentication mechanism for Django
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Enables django-rest-auth to use JWT tokens instead of regular tokens.
 REST_USE_JWT = True
